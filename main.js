@@ -24,3 +24,20 @@ var classifier = ml5.imageClassifier("https://storage.googleapis.com/tm-model/-5
 function modelLoaded(){
     console.log("model loaded!");
 };
+
+function check(){
+    var img = document.getElementById("captured_img");
+    classifier.classify(img, gotresult);
+}
+
+function gotresult(error, result){
+    if(error){
+        console.log(error);
+    }
+    else{
+        console.log(result);
+        document.getElementById("object").innerHTML = result[0].label;
+        document.getElementById("accuracy").innerHTML = result[0].confidence.toFixed(3);
+        //console.log(result[0])
+    }
+}
